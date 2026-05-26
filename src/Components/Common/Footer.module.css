@@ -1,0 +1,52 @@
+.footer {
+  background: #111;
+  color: white;
+
+  padding: 10px 20px;
+  margin-top: 60px;
+
+  text-align: center;
+
+  border-top: 2px solid #e50914;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  cursor: pointer;
+}
+
+.logo {
+  width: 50px;
+  border-radius: 10px;
+}
+
+.logoName {
+  font-weight: 700 !important;
+}
+
+.tagline {
+  color: #bdbdbd;
+  margin-top: 10px !important;
+  font-size: 14px !important;
+}
+
+.copyRight {
+  color: #888;
+  margin-top: 10px !important;
+  font-size: 13px !important;
+}
+
+@media (max-width: 600px) {
+  .logo {
+    width: 40px;
+  }
+
+  .logoName {
+    font-size: 24px !important;
+  }
+}
