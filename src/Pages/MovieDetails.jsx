@@ -7,6 +7,8 @@ import { Box, Typography } from "@mui/material";
 import { useQuery } from "@tanstack/react-query";
 import httpRequest from "../Helpers/httprequest";
 import Loader from "../Components/Loader";
+import Header from "../Components/Common/Header";
+import Footer from "../Components/Common/Footer";
 
 const MovieDetails = () => {
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
@@ -74,6 +76,8 @@ const MovieDetails = () => {
     setIsFav(true);
   };
   return (
+    <>
+    <Header/>
     <Box
       className={styles.container}
       style={{
@@ -148,6 +152,8 @@ const MovieDetails = () => {
         </Box>
       </Box>
     </Box>
+    {/* <Footer/> */}
+    </>
   );
 };
 
