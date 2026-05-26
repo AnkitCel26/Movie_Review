@@ -43,7 +43,7 @@ const Signup = () => {
       className={styles.authPage}
       sx={{
         backgroundImage:
-          "url(https://images.unsplash.com/photo-1524985069026-dd778a71c7b4)",
+          "url(https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
       }}
     >
       <Paper className={styles.authCard}>
