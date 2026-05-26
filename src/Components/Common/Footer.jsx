@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.logoSection} onClick={() => navigate("/")}>
-        <img src={logoURL} alt="logo" className={styles.logo} />
+        <img src={logoURL} alt="logo" className={styles.logo} loading='lazy'/>
 
         <Typography variant="h5" className={styles.logoName}>
           MovieX

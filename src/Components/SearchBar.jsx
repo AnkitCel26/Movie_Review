@@ -45,6 +45,7 @@ const SearchBar = () => {
             <Link key={movie.id} to={`/movie/${movie.id}`}>
               <Box className={styles.resultItem}>
                 <img
+                  loading='lazy'
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
                   className={styles.resultImage}

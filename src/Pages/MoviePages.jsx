@@ -13,8 +13,6 @@ import Footer from "../Components/Common/Footer";
 import Loader from "../Components/Loader";
 
 
-
-
 const MoviePages = ({ title, api }) => {
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
@@ -24,7 +22,6 @@ const MoviePages = ({ title, api }) => {
   const navigate = useNavigate();
 
   //movie_pages
-
   const {
     data: movieData,
     isError: movieisError,
@@ -42,14 +39,15 @@ const MoviePages = ({ title, api }) => {
     refetchOnWindowFocus: false,
     refetch: false,
     enabled: loc.pathname === "/movie",
+    // staleTime:0,
     
   });
 
   useEffect(() => {
     if (movieData?.results) {
-      setMovies(movieData.results);
+      setMovies(movieData.results  || []);
     }
-  }, [movieData, page]);
+  }, [movieData, page,movieisFetching]);
 
   // popular_pages
   const {
@@ -69,13 +67,14 @@ const MoviePages = ({ title, api }) => {
     refetchOnWindowFocus: false,
     refetch: false,
     enabled: loc.pathname === "/popular",
+    // staleTime:0,
   });
 
   useEffect(() => {
     if (popularData?.results) {
-      setMovies(popularData.results);
+      setMovies(popularData.results ||[]);
     }
-  }, [popularData, page]);
+  }, [popularData, page,popularisFetching]);
 
   //tvshows_pages
   const {
@@ -95,13 +94,14 @@ const MoviePages = ({ title, api }) => {
     refetchOnWindowFocus: false,
     refetch: false,
     enabled: loc.pathname === "/tvshows",
+    // staleTime:0,
   });
 
   useEffect(() => {
     if (tvshowData?.results) {
-      setMovies(tvshowData.results);
+      setMovies(tvshowData.results || []);
     }
-  }, [tvshowData, page]);
+  }, [tvshowData, page,tvshowisFetching]);
 
   //upcoming_pages
   const {
@@ -121,13 +121,14 @@ const MoviePages = ({ title, api }) => {
     refetchOnWindowFocus: false,
     refetch: false,
     enabled: loc.pathname === "/upcoming",
+    // staleTime:0,
   });
 
   useEffect(() => {
     if (upcomingData?.results) {
-      setMovies(upcomingData.results);
+      setMovies(upcomingData.results || []);
     }
-  }, [upcomingData, page]);
+  }, [upcomingData, page,upcomingisFetching]);
 
   if (
     movieisFetching ||
@@ -137,10 +138,17 @@ const MoviePages = ({ title, api }) => {
   )
     return <Loader />;
 
+  if (
+    movieisError ||
+    popularisError ||
+    upcomingisError ||
+    tvshowisError
+  )
+    return <Typography> Error....</Typography>;
+
   return (
     <>
       <Header />
-
       {movies.length > 0 && (
         <Swiper
           modules={[Autoplay]}
@@ -179,6 +187,7 @@ const MoviePages = ({ title, api }) => {
               style={{ cursor: "pointer" }}
             >
               <img
+                loading='lazy'
                 src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                 alt={movie.title || movie.name}
                 className={styles.poster}

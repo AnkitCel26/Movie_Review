@@ -92,6 +92,7 @@ const MovieDetails = () => {
     >
       <Box className={styles.wrapper}>
         <img
+          loading='lazy'
           className={styles.poster}
           src={`https://image.tmdb.org/t/p/original${movie?.poster_path}`}
           alt={movie?.title}

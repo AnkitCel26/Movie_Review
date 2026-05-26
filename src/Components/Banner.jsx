@@ -17,6 +17,7 @@ const Banner = ({ movies }) => {
       {movies.map((movie) => (
         <SwiperSlide key={movie.id}>
           <img
+            loading='lazy'
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={movie.title}
             style={{
