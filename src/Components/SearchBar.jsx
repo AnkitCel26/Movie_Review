@@ -10,22 +10,38 @@ const SearchBar = () => {
   const API_KEY = import.meta.env.VITE_APP_API_KEY;
 
   const [query, setQuery] = useState("");
+  const [debounceQuery, setDebounceQuery] = useState("");
   const [results, setResults] = useState([]);
 
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["search_movies", query],
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ["search_movies"],
     queryFn: () =>
       httpRequest(
         "get",
-        `/search/movie?api_key=${API_KEY}&query=${query}`,
+        `/search/movie?api_key=${API_KEY}&query=${debounceQuery}`,
         undefined,
         undefined,
         undefined,
       ),
-    enabled: query.trim() !== "",
+    enabled: false,
     refetchOnWindowFocus: false,
     retry: false,
   });
+ useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebounceQuery(query)
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
+  
+  }, [query]);
+
+  useEffect(()=>{
+      if(debounceQuery){
+      refetch()
+    }
+  },[debounceQuery])
 
   useEffect(() => {
     setResults(data?.results || []);
@@ -45,7 +61,7 @@ const SearchBar = () => {
             <Link key={movie.id} to={`/movie/${movie.id}`}>
               <Box className={styles.resultItem}>
                 <img
-                  loading='lazy'
+                  loading="lazy"
                   src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                   alt={movie.title}
                   className={styles.resultImage}
