@@ -55,7 +55,7 @@ const SearchBar = () => {
         onChange={(e) => setQuery(e.target.value)}
         className={styles.searchInput}
       />
-      {results.length > 0 && (
+      {query !== "" && (
         <Box className={styles.resultsBox}>
           {results.slice(0, 6).map((movie) => (
             <Link key={movie.id} to={`/movie/${movie.id}`}>
